@@ -12,7 +12,7 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'main', url: 'https://github.com/Aakibgithuber/deployment-of-youtube.git'
+                git branch: 'main', url: 'https://github.com/zarnithaw/youtube-clone.git'
             }
         }
         stage('Install Dependencies') {
@@ -25,8 +25,8 @@ pipeline{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
                        sh "docker build -t youtube-clone ."
-                       sh "docker tag youtube-clone aakibkhan1212/youtube-clone:latest "
-                       sh "docker push aakibkhan1212/youtube-clone:latest "
+                       sh "docker tag youtube-clone zarnithaw/youtube-clone:latest "
+                       sh "docker push zarnithaw/youtube-clone:latest "
                        sh "docker "
                     }
                 }
@@ -34,7 +34,7 @@ pipeline{
         }
         stage('Deploy to container'){
             steps{
-                sh 'docker run -d --name youtube-clone -p 3000:3000 aakibkhan1212/youtube-clone:latest'
+                sh 'docker run -d --name youtube-clone -p 3000:3000 zarnithaw/youtube-clone:latest'
             }
         }
     }
